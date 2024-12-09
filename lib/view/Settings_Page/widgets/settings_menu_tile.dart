@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../constants/colors.dart';
 
 class SettingsMenuTile extends StatelessWidget {
   const SettingsMenuTile(
@@ -21,12 +20,12 @@ class SettingsMenuTile extends StatelessWidget {
       leading: Icon(
         icon,
         size: 28,
-        color: Color.fromARGB(255, 23, 59, 89),
+        color: const Color.fromARGB(255, 23, 59, 89),
       ),
       title: Text(
         title,
         style: GoogleFonts.lato(
-      textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
+      textStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
     ),
       ),
       subtitle: Text(

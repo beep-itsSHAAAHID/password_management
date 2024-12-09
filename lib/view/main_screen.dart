@@ -6,7 +6,7 @@ import 'Common_Widgets/navbar.dart';
 import 'Homepage/home_page.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -33,8 +33,8 @@ class _MainScreenState extends State<MainScreen> {
         index: _currentPageIndex,
         children: [
           HomePage(onNavigate: _changePage), // Pass the callback here
-          AddInfo(), // Other pages...
-          SettingsScreen(),
+          const AddInfo(), // Other pages...
+          const SettingsScreen(),
         ],
       ),
       bottomNavigationBar: CustomAnimatedBottomNav(

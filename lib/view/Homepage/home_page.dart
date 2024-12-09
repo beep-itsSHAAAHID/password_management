@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
-import 'package:password_management/view/Add_info/add_info.dart';
 import 'package:password_management/view/Homepage/widgets/gradient_card.dart';
 import 'package:password_management/view/Homepage/widgets/gradients.dart';
 import 'package:password_management/view/Homepage/widgets/sliver_search_app_bar.dart';
@@ -9,7 +8,7 @@ import 'package:password_management/view/Homepage/widgets/sliver_search_app_bar.
 class HomePage extends StatefulWidget {
   final Function(int) onNavigate;
 
-  const HomePage({Key? key, required this.onNavigate}) : super(key: key);
+  const HomePage({super.key, required this.onNavigate});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -37,7 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Color.fromARGB(255, 23, 59, 89)));
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromARGB(255, 23, 59, 89)));
 
     return Scaffold(
       body: RefreshIndicator(
@@ -54,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Your Passwords",style: TextStyle(
+                    const Text("Your Passwords",style: TextStyle(
                       fontWeight: FontWeight.w800
 
                     ), ),
@@ -62,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                       onTap: () {
                         // Implement the navigation or action for "View All"
                       },
-                      child: Text("View All", ),
+                      child: const Text("View All", ),
                     ),
                   ],
                 ),
@@ -84,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                 childCount: items.length,
               ),
             ),
-            SliverPadding(
+            const SliverPadding(
               padding: EdgeInsets.only(bottom: 80), // Adjust the padding to ensure it accommodates the FAB.
             ),
           ],

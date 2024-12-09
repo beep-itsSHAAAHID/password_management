@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts package
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../../../controller/user_controller.dart';
 
 class BackgroundWave extends StatelessWidget {
   final double height;
 
-  const BackgroundWave({Key? key, required this.height}) : super(key: key);
+  const BackgroundWave({super.key, required this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +63,11 @@ class BackgroundWave extends StatelessWidget {
                       }),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 90,
                     height: 20,
                   ),
-                  CircleAvatar(
+                  const CircleAvatar(
                     backgroundColor: Colors.white,
                     child: Icon(
                       Icons.person,

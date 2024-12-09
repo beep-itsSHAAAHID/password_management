@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -81,8 +80,8 @@ class _SignUpViewState extends State<SignUpView> {
         backgroundColor: Colors.green,
         colorText: Colors.white,
         borderRadius: 20,
-        margin: EdgeInsets.all(15),
-        duration: Duration(seconds: 4),
+        margin: const EdgeInsets.all(15),
+        duration: const Duration(seconds: 4),
       );
       print('data added successfully');
     } catch (e) {
@@ -95,8 +94,8 @@ class _SignUpViewState extends State<SignUpView> {
         backgroundColor: Colors.red,
         colorText: Colors.white,
         borderRadius: 20,
-        margin: EdgeInsets.all(15),
-        duration: Duration(seconds: 4),
+        margin: const EdgeInsets.all(15),
+        duration: const Duration(seconds: 4),
       );
     }
   }

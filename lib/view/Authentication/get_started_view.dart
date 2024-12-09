@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:password_management/view/Authentication/widgets/widgets.dart';
-
 import '../../animations/fade_in_slide.dart';
 import '../../constants/colors.dart';
 import '../../helper/doc_helper_function.dart';
@@ -17,9 +18,79 @@ class GetStartedView extends StatefulWidget {
 }
 
 class _GetStartedViewState extends State<GetStartedView> {
+
+
+  final LocalAuthentication auth = LocalAuthentication();
+ // _SupportState _supportState = _SupportState.unknown;
+  bool? _canCheckBiometrics;
+  List<BiometricType>? _availableBiometrics;
+  String _authorized = 'Not Authorized';
+  bool _isAuthenticating = false;
+
+  @override void initState() {
+    // TODO: implement initState
+
+    super.initState();
+    // auth.isDeviceSupported().then(
+    //       (bool isSupported) => setState(() => _supportState = isSupported
+    //       ? _SupportState.supported
+    //       : _SupportState.unsupported),
+    // );
+
+    _authenticateWithBiometrics();
+
+
+  }
+
+
+
+  Future<void> _authenticateWithBiometrics() async {
+    bool authenticated = false;
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+      });
+      authenticated = await auth.authenticate(
+        localizedReason:
+        'Scan your fingerprint (or face or whatever) to authenticate',
+        options: const AuthenticationOptions(
+
+
+
+          stickyAuth: true,
+          biometricOnly: true,
+        ),
+      );
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Authenticating';
+      });
+    } on PlatformException catch (e) {
+      print(e);
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+      return;
+    }
+    if (!mounted) {
+      return;
+    }
+
+    final String message = authenticated ? 'Authorized' : 'Not Authorized';
+    setState(() {
+      _authorized = message;
+    });
+  }
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
-    final dark = DocHelperFunctions.isDarkMode(context);
+
     final theme = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
     final isDark = MediaQuery.platformBrightnessOf(context) == Brightness.dark;
@@ -70,9 +141,9 @@ class _GetStartedViewState extends State<GetStartedView> {
             FadeInSlide(
               duration: .8,
               child: LoginButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.apple,
-                  color: isDark ? Colors.white : Colors.black,
+                  color:Colors.black,
                 ),
                 text: "Continue with Apple",
                 onPressed: () {},
@@ -132,7 +203,7 @@ class _GetStartedViewState extends State<GetStartedView> {
                 },
                 style: FilledButton.styleFrom(
                   fixedSize: const Size.fromHeight(50),
-                  backgroundColor: dark ? TColors.light : TColors.dark,
+                  backgroundColor: TColors.light,
                 ),
                 child: Text(
                   "Create Account",

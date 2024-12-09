@@ -10,7 +10,7 @@ class GradientCard extends StatelessWidget {
   final LinearGradient gradient; // Add this line for custom gradient
 
   const GradientCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.email,
     required this.serviceIcon,
@@ -18,7 +18,7 @@ class GradientCard extends StatelessWidget {
     required this.onToggleVisibility,
     required this.password,
     required this.gradient, // Add this line to constructor
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class GradientCard extends StatelessWidget {
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
               blurRadius: 8,
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
             ),
           ],
           gradient: gradient, // Use the passed gradient here
@@ -52,7 +52,7 @@ class GradientCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+                        Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
                         Text(email, style: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.9))),
                         Text(isPasswordVisible ? password : '•' * password.length, style: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.9))),
                       ],

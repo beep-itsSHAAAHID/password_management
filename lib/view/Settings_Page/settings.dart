@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:password_management/view/Settings_Page/widgets/custom_appbar.dart';
 import 'package:password_management/view/Settings_Page/widgets/sectionheading.dart';
 import 'package:password_management/view/Settings_Page/widgets/settings_menu_tile.dart';
 import 'package:password_management/view/Settings_Page/widgets/t_primary_continer.dart';
 import 'package:password_management/view/Settings_Page/widgets/t_user_tile.dart';
 import '../../animations/fade_in_slide.dart';
-import '../../constants/colors.dart';
 import '../../constants/size.dart';
 import '../Authentication/login_view.dart';
 
@@ -46,7 +44,7 @@ class SettingsScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(Tsizes.defaultspace),
                   child: Column(
                     children: [
-                      TSectionHeading(
+                      const TSectionHeading(
                         title: 'Account Settings',
                         showActionButton: false,
                       ),
@@ -78,10 +76,10 @@ class SettingsScreen extends StatelessWidget {
                         ontap: () {},
                       ),
                       //app Settings
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      TSectionHeading(
+                      const TSectionHeading(
                         title: 'App Settings',
                         showActionButton: false,
                       ),
@@ -104,27 +102,27 @@ class SettingsScreen extends StatelessWidget {
                             // Sign out the user
                             await FirebaseAuth.instance.signOut();
                             // Using GetX to navigate back to the SignInView (login screen)
-                            Get.offAll(() => SignInView());
+                            Get.offAll(() => const SignInView());
                             // Optionally, clear any other app-specific state here if necessary
                           },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
                             backgroundColor: Colors.white, // Text color
-                            side: BorderSide(color: Color.fromARGB(255, 23, 59, 89), width: 2.0), // Border color
+                            side: const BorderSide(color: Color.fromARGB(255, 23, 59, 89), width: 2.0), // Border color
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                           ).copyWith(
-                            backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                                  (Set<MaterialState> states) {
-                                if (states.contains(MaterialState.pressed)) {
+                            backgroundColor: WidgetStateProperty.resolveWith<Color?>(
+                                  (Set<WidgetState> states) {
+                                if (states.contains(WidgetState.pressed)) {
                                   return Colors.blue; // Changes background color when the button is pressed
                                 }
                                 // Default color
-                                return Color.fromARGB(255, 23, 59, 89); // Default background color
+                                return const Color.fromARGB(255, 23, 59, 89); // Default background color
                               },
                             ),
-                            overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                                  (Set<MaterialState> states) {
-                                if (states.contains(MaterialState.pressed)) {
+                            overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                                  (Set<WidgetState> states) {
+                                if (states.contains(WidgetState.pressed)) {
                                   return Colors.blue; // Overlay color when the button is pressed
                                 }
                                 return null; // Use the default overlay color
@@ -134,7 +132,7 @@ class SettingsScreen extends StatelessWidget {
                           child: Text(
                             "Log Out",
                             style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                 color: Colors.white,
                                 letterSpacing: .5,
                               ),

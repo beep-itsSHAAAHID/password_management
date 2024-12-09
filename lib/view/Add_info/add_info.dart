@@ -7,12 +7,10 @@ import 'package:password_management/view/Add_info/widgets/usertile_addinfo.dart'
 import 'package:password_management/view/Settings_Page/widgets/t_primary_continer.dart';
 import '../../animations/fade_in_slide.dart';
 import '../../blockchain_servies/blochchain_service_file.dart';
-import '../../constants/size.dart';
-import 'package:http/http.dart' as http;
 
 
 class AddInfo extends StatefulWidget {
-  const AddInfo({Key? key}) : super(key: key);
+  const AddInfo({super.key});
 
   @override
   State<AddInfo> createState() => _AddInfoState();
@@ -55,7 +53,7 @@ class _AddInfoState extends State<AddInfo> {
     bool isConnected = await _passwordService.checkConnection();
     if (!isConnected) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to connect to blockchain.')),
+        const SnackBar(content: Text('Failed to connect to blockchain.')),
       );
     }
   }
@@ -86,7 +84,7 @@ class _AddInfoState extends State<AddInfo> {
 
         // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Password added successfully to blockchain!')),
+          const SnackBar(content: Text('Password added successfully to blockchain!')),
         );
       } catch (e) {
         print("Error is : $e");
@@ -104,7 +102,7 @@ class _AddInfoState extends State<AddInfo> {
         _passwordController.text.isEmpty) {
       // Show error message
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please fill all required fields')),
+        const SnackBar(content: Text('Please fill all required fields')),
       );
       return false;
     }
@@ -136,43 +134,43 @@ class _AddInfoState extends State<AddInfo> {
                         "Enter Domain",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFields(
                         controller: _domainController,
                         keyboardType: TextInputType.url,
                         icon: Iconsax.share,
                         hinttext: "Domain",
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       const Text(
                         "Enter Username",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFields(
                         controller: _usernameController,
                         keyboardType: TextInputType.text,
                         icon: Iconsax.personalcard,
                         hinttext: "Username",
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       const Text(
                         "Enter Email",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFields(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         icon: Iconsax.category,
                         hinttext: "Email",
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       const Text(
                         "Enter Password",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFields(
                         controller: _passwordController,
                         //obscureText: true,  // Hide password input
@@ -180,11 +178,11 @@ class _AddInfoState extends State<AddInfo> {
                         icon: Iconsax.security,
                         hinttext: "Password",
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       ElevatedButton(
                         onPressed: _submitData,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 23, 59, 89),
+                          backgroundColor: const Color.fromARGB(255, 23, 59, 89),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
@@ -192,14 +190,14 @@ class _AddInfoState extends State<AddInfo> {
                         child: Text(
                           "Submit Data!",
                           style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                               color: Colors.white,
                               letterSpacing: .5,
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
                     ],
                   ),
                 )

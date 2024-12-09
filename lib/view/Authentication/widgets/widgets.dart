@@ -35,9 +35,7 @@ class LoginButton extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: brightness == Brightness.dark
-                      ? Colors.white
-                      : Colors.black,
+                  color: Colors.black,
                 ),
               )),
           Align(alignment: Alignment.centerLeft, child: icon),
@@ -80,14 +78,14 @@ class RichTwoPartsText extends StatelessWidget {
 class PasswordField extends StatefulWidget {
   final TextEditingController? controller;
 
-  const PasswordField({this.controller, Key? key}) : super(key: key);
+  const PasswordField({this.controller, super.key});
 
   @override
   _PasswordFieldState createState() => _PasswordFieldState();
 }
 
 class _PasswordFieldState extends State<PasswordField> {
-  ValueNotifier<bool> _isObscured = ValueNotifier(true);
+  final ValueNotifier<bool> _isObscured = ValueNotifier(true);
 
   @override
   void dispose() {
@@ -145,8 +143,8 @@ class EmailField extends StatelessWidget {
     this.keyboardType,
     this.hinttext,
     this.icon,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

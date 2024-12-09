@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SearchBarisok extends StatefulWidget {
-  const SearchBarisok({Key? key}) : super(key: key);
+  const SearchBarisok({super.key});
 
   @override
   State<SearchBarisok> createState() => _SearchBarisokState();
@@ -45,13 +45,13 @@ class _SearchBarisokState extends State<SearchBarisok> {
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(30),
             ),
-            prefixIcon: Icon(Icons.search, color: Colors.grey, size: 20), // Smaller icon
+            prefixIcon: const Icon(Icons.search, color: Colors.grey, size: 20), // Smaller icon
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFFACCCC), width: 2),
+              borderSide: const BorderSide(color: Color(0xFFFACCCC), width: 2),
               borderRadius: BorderRadius.circular(30),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFF2F2F7), width: 1),
+              borderSide: const BorderSide(color: Color(0xFFF2F2F7), width: 1),
               borderRadius: BorderRadius.circular(30),
             ),
           ),

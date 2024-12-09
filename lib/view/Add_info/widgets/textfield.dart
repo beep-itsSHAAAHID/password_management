@@ -14,8 +14,8 @@ class TextFields extends StatelessWidget {
     this.keyboardType,
     this.hinttext,
     this.icon,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

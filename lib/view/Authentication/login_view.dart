@@ -3,12 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:password_management/view/Authentication/widgets/widgets.dart';
 
 import 'package:password_management/controller/user_controller.dart';
-import 'package:password_management/view/Homepage/home_page.dart';
 import 'package:password_management/view/main_screen.dart';
 
 import '../../animations/fade_in_slide.dart';
@@ -40,7 +38,7 @@ class _SignInViewState extends State<SignInView> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) =>
-            Center(child: CircularProgressIndicator()),
+            const Center(child: CircularProgressIndicator()),
       );
 
       try {

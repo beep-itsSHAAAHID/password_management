@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -7,20 +6,20 @@ class CustomAnimatedBottomNav extends StatelessWidget {
   final Function(int) onPageSelected;
 
   const CustomAnimatedBottomNav({
-    Key? key,
+    super.key,
     required this.controller,
     required this.onPageSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return AnimatedNotchBottomBar(
       notchBottomBarController: controller,
-      color: Color.fromARGB(255, 23, 59, 89),
+      color: const Color.fromARGB(255, 23, 59, 89),
       showLabel: false,
       shadowElevation: 5,
       kBottomRadius: 28.0,
-      notchColor: Color.fromARGB(255, 136, 189, 232),
+      notchColor: const Color.fromARGB(255, 136, 189, 232),
       removeMargins: false,
       bottomBarWidth: MediaQuery.of(context).size.width *
           0.9, // Adjusted to use 90% of screen width
