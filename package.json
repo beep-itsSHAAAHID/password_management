@@ -1,0 +1,19 @@
+{
+  "name": "password_management",
+  "version": "1.0.0",
+  "description": "A password Managemnt app using blockchain and cryptography.",
+  "main": "truffle-config.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "express": "^4.19.2"
+  }
+}

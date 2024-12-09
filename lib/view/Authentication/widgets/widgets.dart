@@ -77,38 +77,62 @@ class RichTwoPartsText extends StatelessWidget {
   }
 }
 
-class PasswordField extends StatelessWidget {
-  final TextEditingController? controller; // Add controller parameter
+class PasswordField extends StatefulWidget {
+  final TextEditingController? controller;
 
-  const PasswordField({
-    this.controller,
-    Key? key,
-  }) : super(key: key);
+  const PasswordField({this.controller, Key? key}) : super(key: key);
+
+  @override
+  _PasswordFieldState createState() => _PasswordFieldState();
+}
+
+class _PasswordFieldState extends State<PasswordField> {
+  ValueNotifier<bool> _isObscured = ValueNotifier(true);
+
+  @override
+  void dispose() {
+    _isObscured.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final dark = DocHelperFunctions.isDarkMode(context);
-    return TextField(
-      controller: controller, // Use the controller
-      obscureText: true,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: dark
-            ? Colors.blueGrey.withOpacity(.1)
-            : TColors.light.withOpacity(.1),
-        hintText: "Password",
-        prefixIcon: const Icon(IconlyLight.lock, size: 20),
-        suffixIcon: const Icon(IconlyLight.hide, size: 20),
-        prefixIconColor: dark ? Colors.white : Colors.black87,
-        suffixIconColor: dark ? Colors.white : Colors.black87,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide.none,
-        ),
-      ),
+    return ValueListenableBuilder(
+      valueListenable: _isObscured,
+      builder: (context, value, child) {
+        return TextField(
+          controller: widget.controller,
+          obscureText: value,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: dark
+                ? Colors.blueGrey.withOpacity(.1)
+                : TColors.light.withOpacity(.1),
+            hintText: "Password",
+            prefixIcon: const Icon(IconlyLight.lock, size: 20),
+            suffixIcon: IconButton(
+              icon: Icon(
+                value ? IconlyLight.hide : IconlyLight.show,
+                size: 20,
+              ),
+              onPressed: () {
+                _isObscured.value = !_isObscured.value;
+              },
+            ),
+            prefixIconColor: dark ? Colors.white : Colors.black87,
+            suffixIconColor: dark ? Colors.white : Colors.black87,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide.none,
+            ),
+          ),
+        );
+      },
     );
   }
 }
+
 
 class EmailField extends StatelessWidget {
   final TextInputType? keyboardType;

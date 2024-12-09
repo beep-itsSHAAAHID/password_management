@@ -1,9 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
+import 'dart:math';
+import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:password_management/view/Authentication/widgets/widgets.dart';
 
@@ -36,34 +38,42 @@ class _SignUpViewState extends State<SignUpView> {
     super.dispose();
   }
 
+  String generateUserHash(int length) {
+    final Random random = Random.secure();
+    final List<int> values = List<int>.generate(length, (i) => random.nextInt(256));
+    return base64Url.encode(values);
+  }
+
   Future<void> submitUserData() async {
     final String fullName = _fullNameController.text;
     final String phoneNumber = _phoneNumberController.text;
     final String email = _emailController.text;
+    final String password = _passwordController.text;
 
     try {
-      LoadingScreen.instance().show(context: context, text: "Sign Up...");
-      await Future.delayed(const Duration(seconds: 1));
-      print('adding data');
+      LoadingScreen.instance().show(context: context, text: "Signing Up...");
 
-      // Hide the password storage comment as we won't store the password in Firestore
-      // Add additional user data to Firestore with email as the document ID
-      final CollectionReference users =
-          FirebaseFirestore.instance.collection('users');
+      // Create user with email and password
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Generate a unique SHA-256 hash for the user
+      final String userHash = generateUserHash(32);
+      print('Generated users cryptographic key : $userHash');
+
+      final CollectionReference users = FirebaseFirestore.instance.collection('users');
       await users.doc(email).set({
         'fullName': fullName,
         'phoneNumber': phoneNumber,
-        'email':
-            email, // Storing the email in the document as well, for easy access
-
-        // Add other fields as needed...
+        'email': email,
+        'userHash': userHash,
       });
-      // Add additional user data to Firestore
 
       // Hide loading and navigate to Home
       LoadingScreen.instance().hide();
-      Navigator.pushReplacement(context,
-          CupertinoPageRoute(builder: (context) => const SignInView()));
+      Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) => const SignInView()));
       Get.snackbar(
         "Signup Successful",
         "Welcome to DocBook! Please login to continue.",
@@ -74,14 +84,13 @@ class _SignUpViewState extends State<SignUpView> {
         margin: EdgeInsets.all(15),
         duration: Duration(seconds: 4),
       );
-      print('data added succesfully');
+      print('data added successfully');
     } catch (e) {
       print('Firebase error: $e');
       LoadingScreen.instance().hide();
-      // Display an error message using Get.snackbar
       Get.snackbar(
         "Signup Failed",
-        "An error occurred during signup: $e", // You might want to customize the error message
+        "An error occurred during signup: $e",
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
         colorText: Colors.white,
@@ -91,6 +100,7 @@ class _SignUpViewState extends State<SignUpView> {
       );
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -233,15 +243,15 @@ class _SignUpViewState extends State<SignUpView> {
               children: [
                 Expanded(
                     child: Divider(
-                  thickness: .3,
-                )),
+                      thickness: .3,
+                    )),
                 Text(
                   "   or   ",
                 ),
                 Expanded(
                     child: Divider(
-                  thickness: .3,
-                )),
+                      thickness: .3,
+                    )),
               ],
             ),
           ),
@@ -269,13 +279,11 @@ class _SignUpViewState extends State<SignUpView> {
           SizedBox(height: height * 0.02),
         ],
       ),
-      // persistentFooterAlignment: AlignmentDirectional.center,
       bottomNavigationBar: FadeInSlide(
         duration: 1,
         direction: FadeSlideDirection.btt,
         child: Container(
-          padding:
-              const EdgeInsets.only(bottom: 40, left: 20, right: 20, top: 30),
+          padding: const EdgeInsets.only(bottom: 40, left: 20, right: 20, top: 30),
           decoration: const BoxDecoration(
             border: Border(
               top: BorderSide(width: .2, color: Colors.white),
